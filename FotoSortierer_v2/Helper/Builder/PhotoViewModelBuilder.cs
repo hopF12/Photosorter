@@ -14,7 +14,7 @@ namespace FotoSortierer_v2.Helper.Builder
             _cameraViewModelBuilder = cameraViewModelBuilder;
         }
 
-        public IPhotoViewModel Create(IPhotoModel model)
+        public IPhotoViewModel Build(IPhotoModel model)
         {
             var viewModel = new PhotoViewModel
             {

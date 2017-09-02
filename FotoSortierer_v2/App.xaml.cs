@@ -38,7 +38,8 @@ namespace FotoSortierer_v2
 
             // register Dialogs
             builder.RegisterType<VistaFolderBrowserDialog>().InstancePerLifetimeScope();
-            builder.RegisterType<VistaOpenFileDialog>().WithProperty("Multiselect", true).InstancePerLifetimeScope();
+            builder.RegisterType<VistaOpenFileDialog>().WithProperty("Multiselect", true)
+                                                       .WithProperty("Filter", "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*").InstancePerLifetimeScope();
 
             // register Helper
             builder.RegisterType<CameraModelBuilder>().AsImplementedInterfaces().SingleInstance();

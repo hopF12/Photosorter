@@ -21,6 +21,7 @@ namespace FotoSortierer_v2.Services
         {
             var fileNames = new List<string>();
 
+            // if user selects photos return the paths of photos.
             if (_openFileDialog.ShowDialog() == true)
             {
                 fileNames = _openFileDialog.FileNames.ToList();

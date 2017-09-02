@@ -83,8 +83,8 @@
     <Compile Include="Helper\DebugHelper.cs" />
     <Compile Include="Helper\Builder\Interfaces\IPhotoViewModelBuilder.cs" />
     <Compile Include="Helper\Builder\PhotoViewModelBuilder.cs" />
-    <Compile Include="Helper\IObservableCollectionAdapter.cs" />
-    <Compile Include="Helper\ObservableCollectionAdapter.cs" />
+    <Compile Include="Helper\Adapter\Interfaces\IObservableCollectionAdapter.cs" />
+    <Compile Include="Helper\Adapter\ObservableCollectionAdapter.cs" />
     <Compile Include="Helper\IocContainer.cs" />
     <Compile Include="Helper\ViewModelLocator.cs" />
     <Compile Include="Properties\Annotations.cs" />

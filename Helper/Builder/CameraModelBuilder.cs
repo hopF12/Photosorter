@@ -14,6 +14,8 @@ namespace Helper.Builder
             {
                 CameraName = $"{cameraManufacturer} {cameraModel}",
                 TimeZoneInfo = TimeZoneInfo.Local,
+
+                // get the correct icon for the camera facturer from recourses
                 CameraIcon =
                     new BitmapImage(new Uri(
                         $"pack://application:,,,/Icons/Camera_Factory_Icons/{cameraManufacturer}.ico",

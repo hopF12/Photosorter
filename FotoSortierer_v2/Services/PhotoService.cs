@@ -27,7 +27,7 @@ namespace FotoSortierer_v2.Services
         public async Task<IEnumerable<IPhotoViewModel>> GetPhotosAsync()
         {
             var models = await _photoRepository.GetPhotosAsync(_openFilesDialog.GetFileNames());
-            var photos = models.Select(photoModel => _photoFactory.Create(photoModel)).ToList();
+            var photos = models.Select(photoModel => _photoFactory.Build(photoModel)).ToList();
 
             return photos;
         }

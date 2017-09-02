@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Media.Imaging;
+using FotoSortierer_v2.Helper.Adapter;
+using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using FotoSortierer_v2.ViewModel;
 using FotoSortierer_v2.ViewModel.Interfaces;
 

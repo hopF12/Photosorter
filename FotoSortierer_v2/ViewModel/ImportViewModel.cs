@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
 using System.Windows.Input;
 using FotoSortierer_v2.Helper;
+using FotoSortierer_v2.Helper.Adapter;
+using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using FotoSortierer_v2.Services;
 using FotoSortierer_v2.Services.Interfaces;
 using FotoSortierer_v2.ViewModel.Interfaces;

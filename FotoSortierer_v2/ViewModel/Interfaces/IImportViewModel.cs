@@ -1,4 +1,5 @@
 ﻿using FotoSortierer_v2.Helper;
+using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using Model.Interfaces;
 
 namespace FotoSortierer_v2.ViewModel.Interfaces

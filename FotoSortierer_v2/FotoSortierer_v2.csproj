@@ -88,7 +88,9 @@
     <Compile Include="Helper\IocContainer.cs" />
     <Compile Include="Helper\ViewModelLocator.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="Services\CameraService.cs" />
     <Compile Include="Services\DialogsService.cs" />
+    <Compile Include="Services\Interfaces\ICameraService.cs" />
     <Compile Include="Services\Interfaces\IOpenFilesDialogService.cs" />
     <Compile Include="Services\Interfaces\ISaveFolderDialogService.cs" />
     <Compile Include="Services\Interfaces\IPhotoService.cs" />

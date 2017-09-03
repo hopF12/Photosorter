@@ -1,9 +1,6 @@
-﻿using System.Threading.Tasks;
-using System.Windows.Input;
-using FotoSortierer_v2.Helper;
+﻿using System.Windows.Input;
 using FotoSortierer_v2.Helper.Adapter;
 using FotoSortierer_v2.Helper.Adapter.Interfaces;
-using FotoSortierer_v2.Services;
 using FotoSortierer_v2.Services.Interfaces;
 using FotoSortierer_v2.ViewModel.Interfaces;
 using Model;
@@ -17,13 +14,15 @@ namespace FotoSortierer_v2.ViewModel
     {
         private readonly IMessenger _messenger;
         private readonly IPhotoService _photoService;
+        private readonly ICameraService _cameraService;
         private IObservableCollectionAdapter<ICameraViewModel> _cameras;
         private IObservableCollectionAdapter<IPhotoViewModel> _photos; // Todo: make collections readonly
 
-        public ImportViewModel(IMessenger messenger, IPhotoService photoService)
+        public ImportViewModel(IMessenger messenger, IPhotoService photoService, ICameraService cameraService)
         {
             _messenger = messenger;
             _photoService = photoService;
+            _cameraService = cameraService;
 
             _photos = new ObservableCollectionAdapter<IPhotoViewModel>();
             _cameras = new ObservableCollectionAdapter<ICameraViewModel>();
@@ -40,6 +39,7 @@ namespace FotoSortierer_v2.ViewModel
         private async void ExecuteOpen()
         {
             Photos.AddRange(await _photoService.GetPhotosAsync());
+            Cameras.AddRange(_cameraService.GetCameras(_photos));
         }
 
         public ICommand OpenCommand { get; }

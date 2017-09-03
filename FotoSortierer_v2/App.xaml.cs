@@ -53,6 +53,7 @@ namespace FotoSortierer_v2
             // register Services
             builder.RegisterType<DialogsService>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<PhotoService>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<CameraService>().AsImplementedInterfaces().SingleInstance();
 
             // register all viewmodels as its implemented interfaces, except the mockviewmodel.
             builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel") && !t.Name.StartsWith("Mock")).AsImplementedInterfaces();

@@ -39,7 +39,7 @@ namespace FotoSortierer_v2.Helper
 
         public IObservableCollectionAdapter<ICameraViewModel> ImportViewModel_CameraViewModels => new ObservableCollectionAdapter<ICameraViewModel>()
         {
-            new CameraViewModel {CameraName = "Camera 1", TimeZoneInfo = TimeZoneInfo.Local, CameraIcon = new BitmapImage(new Uri("pack://application:,,,/Icons/Camera_Factory_Icons/LG.ico"))},
+            new CameraViewModel {CameraName = "Camera 1", TimeZoneInfo = TimeZoneInfo.Local, CameraIcon = new BitmapImage(new Uri("pack://application:,,,/Icons/Camera_Factory_Icons/LG Electronics.ico"))},
             new CameraViewModel {CameraName = "Camera 2", TimeZoneInfo = TimeZoneInfo.Local, CameraIcon = new BitmapImage(new Uri("pack://application:,,,/Icons/Camera_Factory_Icons/Nikon.ico"))}
         };
 

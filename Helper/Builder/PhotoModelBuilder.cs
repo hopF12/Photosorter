@@ -7,6 +7,7 @@ using Model.Interfaces;
 
 namespace Helper.Builder
 {
+    //ToDo comment this
     public class PhotoModelBuilder : IPhotoModelBuilder
     {
         private readonly ICameraModelBuilder _cameraBuilder;
@@ -33,7 +34,6 @@ namespace Helper.Builder
                 Path = fileName,
                 Image = bitmapFrame
             };
-
 
             return model;
         }

@@ -4,6 +4,7 @@ using System.Threading;
 
 namespace MVVM.Messenger
 {
+    //ToDo comment this
     public class Messenger : IMessenger
     {
         private static Messenger _instance;

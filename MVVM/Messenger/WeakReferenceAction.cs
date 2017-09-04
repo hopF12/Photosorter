@@ -2,6 +2,7 @@ using System;
 
 namespace MVVM.Messenger
 {
+    //ToDo comment this
     public class WeakReferenceAction
     {
         private Action _action;
@@ -26,7 +27,7 @@ namespace MVVM.Messenger
             _action = null;
         }
     }
-
+    //ToDo comment this
     public class WeakReferenceAction<T> : WeakReferenceAction, IActionParameter
     {
         public WeakReferenceAction(object target, Action<T> action)

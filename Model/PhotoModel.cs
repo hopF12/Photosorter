@@ -5,6 +5,7 @@ using Model.Interfaces;
 
 namespace Model
 {
+    //ToDo comment this
     public class PhotoModel : IPhotoModel
     {
         public string Name { get; set; }

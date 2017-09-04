@@ -10,6 +10,7 @@ using MVVM.Messenger;
 
 namespace FotoSortierer_v2.ViewModel
 {
+    /// <inheritdoc cref="IImportViewModel" />
     public class ImportViewModel : ViewModelBase<ImportModel>, IImportViewModel
     {
         private readonly IMessenger _messenger;
@@ -45,6 +46,7 @@ namespace FotoSortierer_v2.ViewModel
         public ICommand OpenCommand { get; }
         public ICommand OkCommand { get; }
 
+        /// <inheritdoc />
         public IObservableCollectionAdapter<ICameraViewModel> Cameras
         {
             get => _cameras;
@@ -55,7 +57,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <inheritdoc />
         public IPhotoModel SelectedPhoto
         {
             get => Model.SelectedPhoto;
@@ -67,6 +69,7 @@ namespace FotoSortierer_v2.ViewModel
             }
         }
 
+        /// <inheritdoc />
         public IObservableCollectionAdapter<IPhotoViewModel> Photos
         {
             get => _photos;

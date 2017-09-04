@@ -3,7 +3,7 @@ using MahApps.Metro.Controls;
 using Model.Interfaces;
 
 namespace FotoSortierer_v2.ViewModel.Interfaces
-{
+{   //ToDo comment
     public interface IHamburgerMenuViewModel : IHamburgerMenuModel
     {
         /// <summary>

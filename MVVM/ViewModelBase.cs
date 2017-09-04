@@ -7,13 +7,15 @@ using MVVM.Annotations;
 
 namespace MVVM
 {
+    /// <inheritdoc />
     /// <summary>
     /// Viewmodelbase class without a model.
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
+        //ToDo comment
         public event PropertyChangedEventHandler PropertyChanged;
-
+        //ToDo comment
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
@@ -21,6 +23,7 @@ namespace MVVM
         }
     }
 
+    /// <inheritdoc />
     /// <summary>
     /// Viewmodelbase class with Model.
     /// </summary>
@@ -34,7 +37,7 @@ namespace MVVM
         {
             Model = Activator.CreateInstance<TModel>();
         }
-
+        //ToDo comment
         protected TModel Model
         {
             get => _model;

@@ -2,9 +2,10 @@
 
 namespace Model
 {
-    //ToDo comment this
+    ///<inheritdoc />
     public class MainModel : IMainModel
     {
+        ///<inheritdoc />
         public int SelectedTabIndex { get; set; }
     }
 }

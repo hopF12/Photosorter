@@ -6,9 +6,10 @@ using Model.Interfaces;
 
 namespace Helper.Builder
 {
-    //ToDo comment this
+    ///<inheritdoc />
     public class CameraModelBuilder : ICameraModelBuilder
     {
+        ///<inheritdoc />
         public ICameraModel Build(string cameraManufacturer, string cameraModel)
         {
             var model = new CameraModel

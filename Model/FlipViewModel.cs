@@ -2,10 +2,12 @@
 
 namespace Model
 {
-    //ToDo comment this
+    ///<inheritdoc />
     public class FlipViewModel : IFlipViewModel
     {
+        ///<inheritdoc />
         public int SelectedIndex { get; set; }
+        ///<inheritdoc />
         public IPhotoModel SelectedItem { get; set; }
     }
 }

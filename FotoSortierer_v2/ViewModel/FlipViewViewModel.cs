@@ -6,10 +6,11 @@ using MVVM;
 
 namespace FotoSortierer_v2.ViewModel
 {
+    /// <inheritdoc cref="IFlipViewViewModel" />
     public class FlipViewViewModel : ViewModelBase<FlipViewModel>, IFlipViewViewModel
     {
         private ObservableCollection<IPhotoModel> _images;
-
+        /// <inheritdoc />
         public ObservableCollection<IPhotoModel> Images
         {
             get => _images;
@@ -20,7 +21,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <inheritdoc />
         public int SelectedIndex
         {
             get => Model.SelectedIndex;
@@ -32,6 +33,7 @@ namespace FotoSortierer_v2.ViewModel
             }
         }
 
+        /// <inheritdoc />
         public IPhotoModel SelectedItem
         {
             get => Model.SelectedItem;

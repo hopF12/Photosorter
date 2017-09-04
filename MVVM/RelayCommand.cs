@@ -4,6 +4,7 @@ using System.Windows.Input;
 
 namespace MVVM
 {
+    /// <inheritdoc />
     /// <summary>
     /// A simple relay Command for easy use of the Command pattern.
     /// </summary>
@@ -29,10 +30,11 @@ namespace MVVM
         /// <remarks></remarks>
         public RelayCommand(Action<object> execute, Predicate<object> canExecute = null)
         {
-            this._execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            this._canExecute = canExecute;
+            _execute = execute ?? throw new ArgumentNullException(nameof(execute));
+            _canExecute = canExecute;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Defines the method that determines whether the command can execute in its current state.
         /// </summary>
@@ -55,6 +57,7 @@ namespace MVVM
             remove => CommandManager.RequerySuggested -= value;
         }
 
+        /// <inheritdoc />
         /// <summary>
         /// Defines the method to be called when the command is invoked.
         /// </summary>

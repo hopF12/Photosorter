@@ -7,7 +7,7 @@ using Model.Interfaces;
 
 namespace Helper.Builder
 {
-    //ToDo comment this
+    ///<inheritdoc />
     public class PhotoModelBuilder : IPhotoModelBuilder
     {
         private readonly ICameraModelBuilder _cameraBuilder;
@@ -16,7 +16,7 @@ namespace Helper.Builder
         {
             _cameraBuilder = cameraBuilder;
         }
-
+        ///<inheritdoc />
         public IPhotoModel Build(string fileName, BitmapFrame bitmapFrame)
         {
             // get metadata from given photo.

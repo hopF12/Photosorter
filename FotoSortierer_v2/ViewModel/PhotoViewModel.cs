@@ -7,8 +7,10 @@ using MVVM;
 
 namespace FotoSortierer_v2.ViewModel
 {
+    /// <inheritdoc cref="IPhotoViewModel" />
     public class PhotoViewModel : ViewModelBase<PhotoModel>, IPhotoViewModel
     {
+        /// <inheritdoc />
         public string Name
         {
             get => Model.Name;
@@ -19,7 +21,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <inheritdoc />
         public string Path
         {
             get => Model.Path;
@@ -30,7 +32,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <inheritdoc />
         public ImageSource Image    
         {
             get => Model.Image;
@@ -41,7 +43,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <inheritdoc />
         public string Comment
         {
             get => Model.Comment;
@@ -52,7 +54,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <inheritdoc />
         public int Similarity
         {
             get => Model.Similarity;
@@ -63,7 +65,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <inheritdoc />
         public ICameraModel Camera
         {
             get => Model.Camera;
@@ -74,7 +76,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        /// <inheritdoc />
         public DateTime DateTaken
         {
             get => Model.DateTaken;

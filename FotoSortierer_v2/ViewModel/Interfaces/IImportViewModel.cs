@@ -4,6 +4,7 @@ using Model.Interfaces;
 
 namespace FotoSortierer_v2.ViewModel.Interfaces
 {
+    /// <inheritdoc />
     /// <summary>
     /// Viewmodel for importview.
     /// </summary>

@@ -1,11 +1,11 @@
-﻿using System.Collections.ObjectModel;
-using Model.Interfaces;
+﻿using Model.Interfaces;
 
 namespace Model
 {
-    //ToDo comment this
+    ///<inheritdoc />
     public class ImportModel : IImportModel
     {
+        ///<inheritdoc />
         public IPhotoModel SelectedPhoto { get; set; }
     }
 }

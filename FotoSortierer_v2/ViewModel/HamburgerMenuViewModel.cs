@@ -7,10 +7,11 @@ using MVVM;
 
 namespace FotoSortierer_v2.ViewModel
 {
+    //ToDo comment
     public class HamburgerMenuViewModel : ViewModelBase<HamburgerMenuModel>, IHamburgerMenuViewModel
     {
         private ObservableCollection<HamburgerMenuGlyphItem> _hamburgerMenuGlyphItems;
-
+        //ToDo comment
         public bool IsHamburgerMenuPaneOpen
         {
             get => Model.IsHamburgerMenuPaneOpen;
@@ -21,7 +22,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        //ToDo comment
         public ObservableCollection<HamburgerMenuGlyphItem> HamburgerMenuGlyphItems
         {
             get => _hamburgerMenuGlyphItems;
@@ -32,7 +33,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-
+        //ToDo comment
         public int SelectedIndex
         {
             get => Model.SelectedIndex;

@@ -11,6 +11,7 @@ using Repository;
 
 namespace FotoSortierer_v2
 {
+    /// <inheritdoc />
     /// <summary>
     /// Interaktionslogik für "App.xaml"
     /// </summary>
@@ -18,6 +19,7 @@ namespace FotoSortierer_v2
     {
         private IContainer _appContainer;
 
+        /// <inheritdoc />
         protected override void OnStartup(StartupEventArgs e)
         {
             // Initialize container
@@ -29,6 +31,7 @@ namespace FotoSortierer_v2
             base.OnStartup(e);
         }
 
+        // ToDo move to Bootstrapper class
         private void SetupContainer()
         {
             var builder = new ContainerBuilder();

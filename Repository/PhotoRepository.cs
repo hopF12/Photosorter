@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -9,7 +8,7 @@ using Repository.Interfaces;
 
 namespace Repository
 {
-    //ToDo comment this
+    ///<inheritdoc />
     public class PhotoRepository : IPhotoRepository
     {
         private readonly IPhotoModelBuilder _builder;
@@ -19,6 +18,7 @@ namespace Repository
             _builder = builder;
         }
 
+        ///<inheritdoc />
         public async Task<IEnumerable<IPhotoModel>> GetPhotosAsync(IEnumerable<string> fileNames)
         {
             var photos = new List<IPhotoModel>();

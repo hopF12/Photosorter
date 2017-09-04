@@ -4,6 +4,7 @@ using Model.Interfaces;
 
 namespace Model
 {
+    //ToDo comment this
     public class CameraModel : ICameraModel
     {
         public string CameraName { get; set; }

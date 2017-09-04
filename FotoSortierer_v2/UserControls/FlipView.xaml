@@ -1,0 +1,47 @@
+﻿<UserControl x:Class="FotoSortierer_v2.UserControls.FlipView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" DataContext="{Binding Path=FlipViewViewModel, Source={StaticResource ViewModelLocator}}"
+             d:DesignHeight="650" d:DesignWidth="1200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="48" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBox Margin="2" HorizontalContentAlignment="Stretch" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.IsWaitingForData="True" 
+                 controls:TextBoxHelper.UseFloatingWatermark="True" controls:TextBoxHelper.Watermark="Fotonamen eingeben..." controls:TextBoxHelper.WatermarkAlignment="Right" 
+                 SpellCheck.IsEnabled="True" ToolTip="Fotoname" Text="{Binding SelectedItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
+
+        <controls:FlipView Grid.Row="1" Grid.RowSpan="2" MouseOverGlowEnabled="False" ItemsSource="{Binding Images}" SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedItem}" Grid.ColumnSpan="2"
+                           Grid.Column="0">
+            <controls:FlipView.ItemTemplate>
+                <DataTemplate>
+                    <Image Margin="2 2 2 30" Source="{Binding Image}" Stretch="Uniform" />
+                </DataTemplate>
+            </controls:FlipView.ItemTemplate>
+        </controls:FlipView>
+        <!--Just to set background-->
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#7A7A7A">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <Label Content="Kommentar:" VerticalAlignment="Center" FontWeight="Bold"/>
+            <TextBox Grid.Column="1" HorizontalContentAlignment="Stretch" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.IsWaitingForData="True" 
+                 controls:TextBoxHelper.UseFloatingWatermark="True" controls:TextBoxHelper.Watermark="Fotonamen eingeben..." controls:TextBoxHelper.WatermarkAlignment="Right"
+                 SpellCheck.IsEnabled="True" ToolTip="Fotoname" Text="{Binding SelectedItem.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2" >
+                <Button Content="Speichern" Margin="2" Width="100" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</UserControl>

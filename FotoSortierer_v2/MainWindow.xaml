@@ -1,0 +1,41 @@
+﻿<controls:MetroWindow x:Class="FotoSortierer_v2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:vm="clr-namespace:FotoSortierer_v2.ViewModel"
+        xmlns:uc="clr-namespace:FotoSortierer_v2.UserControls"
+        xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        Background="{DynamicResource MaterialDesignPaper}"
+        FontFamily="{DynamicResource MaterialDesignFont}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"                      
+        GlowBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        mc:Ignorable="d"
+        dialogs:DialogParticipation.Register="{Binding}" DataContext="{Binding Path=MainViewModel, Source={StaticResource ViewModelLocator}}"
+        Title="{Binding Header}" Height="700" Width="1200" Icon="Icons/PhotoSorter.ico">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TabControl Background="Transparent" SelectedIndex="{Binding SelectedTabIndex}" >
+            <TabItem Header="Öffnen" Foreground="White">
+                <uc:ImportView />
+            </TabItem>
+            <TabItem Header="Übersicht" Foreground="White">
+                <uc:ManageView />
+            </TabItem>
+        </TabControl>
+        <StatusBar Grid.Row="1" Height="Auto">
+            <StatusBarItem >
+                <ProgressBar Width="200" Height="17" Maximum="100" Minimum="0" Value="50" />
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</controls:MetroWindow>

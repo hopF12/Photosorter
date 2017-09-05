@@ -9,6 +9,7 @@ using ViewModels.Annotations;
 
 namespace ViewModels
 {
+    //ToDo comment this
     public class ViewModelBase<TModel> : INotifyPropertyChanged
     {
         public ViewModelBase()

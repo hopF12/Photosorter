@@ -4,16 +4,19 @@ using System.Threading;
 
 namespace MVVM.Messenger
 {
+    ///<inheritdoc />
     public class Messenger : IMessenger
     {
         private static Messenger _instance;
         private static readonly object LockObject = new object();
         private readonly Dictionary<Type, List<ActionIdentifier>> _references;
-
+        
+        //ToDo if this is a singleton this should be private, but better is to use IoC instead of singleton
         public Messenger()
         {
             _references = new Dictionary<Type, List<ActionIdentifier>>();
         }
+        ///<inheritdoc /> //ToDo this is missing in the interface
         public static Messenger Instance
         {
             get
@@ -24,12 +27,12 @@ namespace MVVM.Messenger
                 }
             }
         }
-
+        ///<inheritdoc />
         public void Register<TNotification>(object recipient, Action<TNotification> action)
         {
             Register(recipient, null, action);
         }
-
+        ///<inheritdoc />
         public void Register<TNotification>(object recipient, string identCode, Action<TNotification> action)
         {
             var messageType = typeof(TNotification);
@@ -45,7 +48,7 @@ namespace MVVM.Messenger
 
             _references[messageType].Add(actionIdent);
         }
-
+        ///<inheritdoc />
         public void Send<TNotification>(TNotification notification)
         {
             var type = typeof(TNotification);
@@ -59,7 +62,7 @@ namespace MVVM.Messenger
                     ai.Action.Execute();
             }
         }
-
+        ///<inheritdoc />
         public void Send<TNotification>(TNotification notification, string identCode)
         {
             var type = typeof(TNotification);
@@ -75,7 +78,7 @@ namespace MVVM.Messenger
                 }
             }
         }
-
+        ///<inheritdoc />
         public void Unregister<TNotification>(object recipient)
         {
             var lockTaken = false;

@@ -6,8 +6,10 @@ using Model.Interfaces;
 
 namespace Helper.Builder
 {
+    ///<inheritdoc />
     public class CameraModelBuilder : ICameraModelBuilder
     {
+        ///<inheritdoc />
         public ICameraModel Build(string cameraManufacturer, string cameraModel)
         {
             var model = new CameraModel
@@ -17,7 +19,6 @@ namespace Helper.Builder
                 // get the correct icon for the camera facturer from recourses
                 CameraIcon = new BitmapImage(new Uri($"pack://application:,,,/Icons/Camera_Factory_Icons/{cameraManufacturer}.ico"))
             };
-
 
             return model;
         }

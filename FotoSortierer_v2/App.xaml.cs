@@ -45,7 +45,6 @@ namespace FotoSortierer_v2
                                                        .WithProperty("Filter", "Image Files(*.BMP;*.JPG;*.GIF)|*.BMP;*.JPG;*.GIF|All files (*.*)|*.*").InstancePerLifetimeScope();
 
             // register Helper
-            builder.RegisterType<CameraModelBuilder>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<PhotoModelBuilder>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<CameraViewModelBuilder>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<PhotoViewModelBuilder>().AsImplementedInterfaces().SingleInstance();

@@ -21,6 +21,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
+
         /// <inheritdoc />
         public string Path
         {
@@ -32,17 +33,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
-        /// <inheritdoc />
-        public ImageSource Image    
-        {
-            get => Model.Image;
-            set
-            {
-                if (Model.Image == value) return;
-                Model.Image = value;
-                OnPropertyChanged();
-            }
-        }
+
         /// <inheritdoc />
         public string Comment
         {
@@ -54,6 +45,7 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
+
         /// <inheritdoc />
         public int Similarity
         {
@@ -65,17 +57,31 @@ namespace FotoSortierer_v2.ViewModel
                 OnPropertyChanged();
             }
         }
+
         /// <inheritdoc />
-        public ICameraModel Camera
+        public string CameraFactory
         {
-            get => Model.Camera;
+            get => Model.CameraFactory;
             set
             {
-                if (Model.Camera == value) return;
-                Model.Camera = value;
+                if (Model.CameraFactory == value) return;
+                Model.CameraFactory = value;
                 OnPropertyChanged();
             }
         }
+
+        /// <inheritdoc />
+        public string CameraModel
+        {
+            get => Model.CameraModel;
+            set
+            {
+                if (Model.CameraModel == value) return;
+                Model.CameraModel = value;
+                OnPropertyChanged();
+            }
+        }
+
         /// <inheritdoc />
         public DateTime DateTaken
         {

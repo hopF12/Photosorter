@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using FotoSortierer_v2.Helper.Adapter;
+using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using FotoSortierer_v2.ViewModel.Interfaces;
 using MahApps.Metro.Controls;
 
@@ -10,11 +11,11 @@ namespace FotoSortierer_v2.ViewModel.MockUps
     /// </summary>
     public class MockHamburgerMenuViewModel : IHamburgerMenuViewModel
     {
-        private readonly ObservableCollection<HamburgerMenuGlyphItem> _hamburgerMenuGlyphItems;
+        private readonly IObservableCollectionAdapter<HamburgerMenuGlyphItem> _hamburgerMenuGlyphItems;
 
         public MockHamburgerMenuViewModel()
         {
-            _hamburgerMenuGlyphItems = new ObservableCollection<HamburgerMenuGlyphItem>
+            _hamburgerMenuGlyphItems = new ObservableCollectionAdapter<HamburgerMenuGlyphItem>
             {
                 new HamburgerMenuGlyphItem() {Glyph = "pack://application:,,,/Icons/Folder.ico", Label = "Test 1"},
                 new HamburgerMenuGlyphItem() {Glyph = "pack://application:,,,/Icons/Folder.ico", Label = "Test 2"},
@@ -32,6 +33,6 @@ namespace FotoSortierer_v2.ViewModel.MockUps
 
         public bool IsHamburgerMenuPaneOpen { get; set; }
         public int SelectedIndex { get; set; }
-        public ObservableCollection<HamburgerMenuGlyphItem> HamburgerMenuGlyphItems { get; set; }
+        public IObservableCollectionAdapter<HamburgerMenuGlyphItem> HamburgerMenuGlyphItems { get; set; }
     }
 }

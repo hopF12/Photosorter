@@ -9,7 +9,10 @@ using ViewModels.Annotations;
 
 namespace ViewModels
 {
-    //ToDo comment this
+    /// <summary>
+    /// Base class for each viewmodel.
+    /// </summary>
+    /// <typeparam name="TModel">Model of the viewmodel.</typeparam>
     public class ViewModelBase<TModel> : INotifyPropertyChanged
     {
         public ViewModelBase()

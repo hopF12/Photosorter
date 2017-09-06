@@ -1,5 +1,4 @@
-﻿using FotoSortierer_v2.Helper;
-using FotoSortierer_v2.Helper.Adapter.Interfaces;
+﻿using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using Model.Interfaces;
 
 namespace FotoSortierer_v2.ViewModel.Interfaces
@@ -13,11 +12,11 @@ namespace FotoSortierer_v2.ViewModel.Interfaces
         /// <summary>
         /// List of all recognized cameras.
         /// </summary>
-        IObservableCollectionAdapter<ICameraViewModel> Cameras { get; set; }
+        IObservableCollectionAdapter<ICameraViewModel> Cameras { get; }
 
         /// <summary>
         /// List of all imported images.
         /// </summary>
-        IObservableCollectionAdapter<IPhotoViewModel> Photos { get; set;  }
+        IObservableCollectionAdapter<IPhotoViewModel> Photos { get; }
     }
 }

@@ -22,18 +22,7 @@ namespace FotoSortierer_v2.Services
 
         public IEnumerable<ICameraViewModel> GetCameras(IEnumerable<IPhotoViewModel> photoCollection)
         {
-            //var cameras = photoCollection.Select(photo => _cameraViewModelBuilder.Build(photo.Camera)).Distinct();
-
-            // Todo: check why program gets into break point and exit if I take the above solution.
-            var modelBuilder = new CameraModelBuilder(); // just for test purposes.
-            var cameras = new List<ICameraViewModel>
-            {
-                _cameraViewModelBuilder.Build(modelBuilder.Build("LG Electronics", "bla 1")),
-                _cameraViewModelBuilder.Build(modelBuilder.Build("Sony", "bla 2")),
-                _cameraViewModelBuilder.Build(modelBuilder.Build("Nikon", "bla 3")),
-                _cameraViewModelBuilder.Build(modelBuilder.Build("Samsung", "bla 4")),
-                _cameraViewModelBuilder.Build(modelBuilder.Build("Canon", "bla 5")),
-            };
+            var cameras = photoCollection.Select(photo => _cameraViewModelBuilder.Build(photo.CameraFactory, photo.CameraModel)).GroupBy(c => c.CameraName).Select(c => c.First());
             return cameras;
         }
     }

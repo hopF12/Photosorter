@@ -13,11 +13,11 @@ namespace Model
         ///<inheritdoc />
         public string Path { get; set; }
         ///<inheritdoc />
-        public ImageSource Image { get; set; }
-        ///<inheritdoc />
         public string Comment { get; set; }
         ///<inheritdoc />
-        public ICameraModel Camera { get; set; }
+        public string CameraFactory { get; set; }
+        /// <inheritdoc />
+        public string CameraModel { get; set; }
         ///<inheritdoc />
         public DateTime DateTaken { get; set; }
         ///<inheritdoc />

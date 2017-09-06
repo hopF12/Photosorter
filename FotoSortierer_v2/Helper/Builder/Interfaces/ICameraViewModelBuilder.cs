@@ -1,5 +1,4 @@
 ﻿using FotoSortierer_v2.ViewModel.Interfaces;
-using Model.Interfaces;
 
 namespace FotoSortierer_v2.Helper.Builder.Interfaces
 {
@@ -11,8 +10,9 @@ namespace FotoSortierer_v2.Helper.Builder.Interfaces
         /// <summary>
         /// Builds new CameraViewModels of CameraModels.
         /// </summary>
-        /// <param name="model">CameraModel with all properties, that should be used for new CameraViewModel.</param>
+        /// <param name="manufactorer">Manufactorername of the camera.</param>
+        /// <param name="model">Modelname of the camera.</param>
         /// <returns>Returns a new instance of CameraViewModel.</returns>
-        ICameraViewModel Build(ICameraModel model);
+        ICameraViewModel Build(string manufactorer, string model);
     }
 }

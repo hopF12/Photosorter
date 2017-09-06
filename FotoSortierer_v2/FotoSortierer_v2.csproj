@@ -98,9 +98,6 @@
     <Compile Include="UserControls\FlipView.xaml.cs">
       <DependentUpon>FlipView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UserControls\HamburgerHeader.xaml.cs">
-      <DependentUpon>HamburgerHeader.xaml</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\HamburgerMenu.xaml.cs">
       <DependentUpon>HamburgerMenu.xaml</DependentUpon>
     </Compile>
@@ -112,7 +109,6 @@
     </Compile>
     <Compile Include="ViewModel\CameraViewModel.cs" />
     <Compile Include="ViewModel\FlipViewViewModel.cs" />
-    <Compile Include="ViewModel\HamburgerHeaderViewModel.cs" />
     <Compile Include="ViewModel\HamburgerMenuViewModel.cs" />
     <Compile Include="ViewModel\Interfaces\ICameraViewModel.cs" />
     <Compile Include="ViewModel\Interfaces\IFlipViewViewModel.cs" />
@@ -146,10 +142,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\FlipView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControls\HamburgerHeader.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

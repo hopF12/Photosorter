@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" DataContext="{Binding Path=FlipViewViewModel, Source={StaticResource ViewModelLocator}}"
              d:DesignHeight="650" d:DesignWidth="1200">
     <Grid>
@@ -21,10 +22,10 @@
                  SpellCheck.IsEnabled="True" ToolTip="Fotoname" Text="{Binding SelectedItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
 
         <controls:FlipView Grid.Row="1" Grid.RowSpan="2" MouseOverGlowEnabled="False" ItemsSource="{Binding Images}" SelectedIndex="{Binding SelectedIndex}" SelectedItem="{Binding SelectedItem}" Grid.ColumnSpan="2"
-                           Grid.Column="0">
+                           Grid.Column="0" >
             <controls:FlipView.ItemTemplate>
                 <DataTemplate>
-                    <Image Margin="2 2 2 30" Source="{Binding Image}" Stretch="Uniform" />
+                    <Image Margin="2 2 2 30" Source="{Binding Path}" Stretch="Uniform" />
                 </DataTemplate>
             </controls:FlipView.ItemTemplate>
         </controls:FlipView>

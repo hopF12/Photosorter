@@ -42,8 +42,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Builder\CameraModelBuilder.cs" />
-    <Compile Include="Builder\Interfaces\ICameraModelBuilder.cs" />
     <Compile Include="Builder\Interfaces\IPhotoModelBuilder.cs" />
     <Compile Include="Builder\PhotoModelBuilder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,11 +9,6 @@ namespace Model.Interfaces
     public interface IPhotoModel
     {
         /// <summary>
-        /// The image itself. Can be binded in view.
-        /// </summary>
-        ImageSource Image { get; set; }
-
-        /// <summary>
         /// Name of the photo.
         /// </summary>
         string Name { get; set; }
@@ -29,9 +24,14 @@ namespace Model.Interfaces
         string Comment { get; set; }
 
         /// <summary>
-        /// Object of camera with which the photo was taken.
+        /// Name of camera's factory.
         /// </summary>
-        ICameraModel Camera { get; set; }
+        string CameraFactory { get; set; }
+
+        /// <summary>
+        /// Model-Name of the camera.
+        /// </summary>
+        string CameraModel { get; set; }
 
         /// <summary>
         /// Datetime when the photo is taken. Calculates with the set offset of camera.

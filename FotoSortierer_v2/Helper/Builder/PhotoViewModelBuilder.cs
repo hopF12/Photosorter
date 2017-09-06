@@ -7,19 +7,12 @@ namespace FotoSortierer_v2.Helper.Builder
 {
     public class PhotoViewModelBuilder : IPhotoViewModelBuilder
     {
-        private readonly ICameraViewModelBuilder _cameraViewModelBuilder;
-
-        public PhotoViewModelBuilder(ICameraViewModelBuilder cameraViewModelBuilder)
-        {
-            _cameraViewModelBuilder = cameraViewModelBuilder;
-        }
-
         public IPhotoViewModel Build(IPhotoModel model)
         {
             var viewModel = new PhotoViewModel
             {
-                Image = model.Image,
-                Camera = _cameraViewModelBuilder.Build(model.Camera),
+                CameraFactory = model.CameraFactory,
+                CameraModel = model.CameraModel,
                 Comment = model.Comment,
                 DateTaken = model.DateTaken,
                 Name = model.Name,

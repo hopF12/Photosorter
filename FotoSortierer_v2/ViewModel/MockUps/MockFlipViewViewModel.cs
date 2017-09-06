@@ -1,6 +1,8 @@
 ﻿using System;
-using System.Collections.ObjectModel;
+using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using FotoSortierer_v2.Helper.Adapter;
+using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using FotoSortierer_v2.ViewModel.Interfaces;
 using Model.Interfaces;
 
@@ -12,20 +14,9 @@ namespace FotoSortierer_v2.ViewModel.MockUps
     /// </summary>
     public class MockFlipViewViewModel : IFlipViewViewModel
     {
-        public MockFlipViewViewModel()
-        {
-            Images = new ObservableCollection<IPhotoModel>
-            {
-                new PhotoViewModel{ Image = new BitmapImage(new Uri("pack://application:,,,/Icons/default.jpg")), Name = "Photo 1" },
-                new PhotoViewModel{ Image = new BitmapImage(new Uri("pack://application:,,,/Icons/default.jpg")), Name = "Photo 2" },
-                new PhotoViewModel{ Image = new BitmapImage(new Uri("pack://application:,,,/Icons/default.jpg")), Name = "Photo 3" },
-                new PhotoViewModel{ Image = new BitmapImage(new Uri("pack://application:,,,/Icons/default.jpg")), Name = "Photo 4" },
-                new PhotoViewModel{ Image = new BitmapImage(new Uri("pack://application:,,,/Icons/default.jpg")), Name = "Photo 5" }
-            };
-        }
-
         public int SelectedIndex { get; set; }
         public IPhotoModel SelectedItem { get; set; }
-        public ObservableCollection<IPhotoModel> Images { get; set; }
+        public IObservableCollectionAdapter<IPhotoViewModel> Images { get; set; }
+        public ICommand NavigationCommand { get; }
     }
 }

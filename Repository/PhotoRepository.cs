@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
 using Helper.Builder.Interfaces;
+using Model;
 using Model.Interfaces;
 using Repository.Interfaces;
 
@@ -29,8 +31,8 @@ namespace Repository
                 {
                     using (var fs = new FileStream(fileName, FileMode.Open))
                     {
-                        var image = BitmapFrame.Create(fs);
-                        var photoModel = _builder.Build(fileName, image);
+                        var metaData = (BitmapMetadata)BitmapFrame.Create(fs).Metadata;
+                        var photoModel = _builder.Build(fileName, metaData);
                         photos.Add(photoModel);
                     }
                 }

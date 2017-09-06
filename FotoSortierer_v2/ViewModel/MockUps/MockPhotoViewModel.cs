@@ -16,7 +16,8 @@ namespace FotoSortierer_v2.ViewModel.MockUps
         public string Name { get; set; }
         public string Path { get; set; }
         public string Comment { get; set; }
-        public ICameraModel Camera { get; set; }
+        public string CameraFactory { get; set; }
+        public string CameraModel { get; set; }
         public DateTime DateTaken { get; set; }
         public int Similarity { get; set; }
     }

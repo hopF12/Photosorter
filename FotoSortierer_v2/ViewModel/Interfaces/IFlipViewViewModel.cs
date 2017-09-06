@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using System.Windows.Input;
+using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using Model.Interfaces;
 
 namespace FotoSortierer_v2.ViewModel.Interfaces
@@ -12,6 +13,6 @@ namespace FotoSortierer_v2.ViewModel.Interfaces
         /// <summary>
         /// List of all imported images.
         /// </summary>
-        ObservableCollection<IPhotoModel> Images { get; set; }
+        IObservableCollectionAdapter<IPhotoViewModel> Images { get; set; }
     }
 }

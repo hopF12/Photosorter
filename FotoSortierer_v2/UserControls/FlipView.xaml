@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              mc:Ignorable="d" DataContext="{Binding Path=FlipViewViewModel, Source={StaticResource ViewModelLocator}}"
              d:DesignHeight="650" d:DesignWidth="1200">
     <Grid>
@@ -17,6 +16,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        
         <TextBox Margin="2" HorizontalContentAlignment="Stretch" controls:TextBoxHelper.ClearTextButton="True" controls:TextBoxHelper.IsWaitingForData="True" 
                  controls:TextBoxHelper.UseFloatingWatermark="True" controls:TextBoxHelper.Watermark="Fotonamen eingeben..." controls:TextBoxHelper.WatermarkAlignment="Right" 
                  SpellCheck.IsEnabled="True" ToolTip="Fotoname" Text="{Binding SelectedItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2"/>
@@ -29,6 +29,7 @@
                 </DataTemplate>
             </controls:FlipView.ItemTemplate>
         </controls:FlipView>
+        
         <!--Just to set background-->
         <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Background="#7A7A7A">
             <Grid.ColumnDefinitions>
@@ -41,7 +42,7 @@
                  controls:TextBoxHelper.UseFloatingWatermark="True" controls:TextBoxHelper.Watermark="Fotonamen eingeben..." controls:TextBoxHelper.WatermarkAlignment="Right"
                  SpellCheck.IsEnabled="True" ToolTip="Fotoname" Text="{Binding SelectedItem.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Column="2" >
-                <Button Content="Speichern" Margin="2" Width="100" />
+                <Button Content="Speichern" Margin="2" Width="100" Command="{Binding SaveCommand}" />
             </StackPanel>
         </Grid>
     </Grid>

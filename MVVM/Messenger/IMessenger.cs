@@ -2,10 +2,8 @@ using System;
 
 namespace MVVM.Messenger
 {
-    //ToDo comment missing
     public interface IMessenger
     {
-
         void Register<TNotification>(object recipient, Action<TNotification> action);
         void Register<TNotification>(object recipient, string identCode, Action<TNotification> action);
         void Send<TNotification>(TNotification notification);

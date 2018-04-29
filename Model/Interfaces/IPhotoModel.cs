@@ -1,5 +1,6 @@
 ﻿using System;
-using System.Windows.Media;
+using System.Collections.Generic;
+using ImageSimilarity;
 
 namespace Model.Interfaces
 {
@@ -37,10 +38,26 @@ namespace Model.Interfaces
         /// Datetime when the photo is taken. Calculates with the set offset of camera.
         /// </summary>
         DateTime DateTaken { get; set; }
+        
+        /// <summary>
+        /// Set the timezone for the photo. It will be used to get the real date taken.
+        /// </summary>
+        TimeZoneInfo OffSet { set; }
 
         /// <summary>
-        /// Similarity of photo with most similar photo in the imported list. NYI
+        /// Gets or sets a value indicating whether this instance is a folder or not.
         /// </summary>
-        int Similarity { get; set; }
+        /// <value>
+        ///   <c>true</c> if this instance is folder; otherwise, <c>false</c>.
+        /// </value>
+        bool IsFolder { get; set; }
+
+        /// <summary>
+        /// Gets or sets the similar photos.
+        /// </summary>
+        /// <value>
+        /// The similar photos.
+        /// </value>
+        ICollection<ISimilarityImages> SimilarPhotos { get; set; }
     }
 }

@@ -6,6 +6,7 @@
              xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
              mc:Ignorable="d" DataContext="{Binding Path=ImportViewModel, Source={StaticResource ViewModelLocator}}"
              d:DesignHeight="650" d:DesignWidth="1200">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -18,14 +19,24 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <!--Import Button-->
-        <Button Width="100" HorizontalAlignment="Left" Margin="2" Command="{Binding OpenCommand}" HorizontalContentAlignment="Left">
-            <StackPanel Orientation="Horizontal">
-                <Image Source="../Icons/Folder.ico" Margin="2" VerticalAlignment="Center" />
-                <TextBlock Text="Öffne" VerticalAlignment="Center"/>
-            </StackPanel>
-        </Button>
-        
+        <StackPanel Orientation="Horizontal">
+            <!--Import Button-->
+            <Button HorizontalAlignment="Left" Margin="2,2,0,2" Command="{Binding ImportCommand}" HorizontalContentAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Icons/open_folder.ico" Margin="2" VerticalAlignment="Center" />
+                    <TextBlock Text="Importieren" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            
+            <!--Compare Button-->
+            <Button HorizontalAlignment="Left" Margin="2,2,0,2" Command="{Binding CompareCommand}" HorizontalContentAlignment="Left">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="../Icons/compare.png" Margin="2" VerticalAlignment="Center" />
+                    <TextBlock Text="Vergleichen" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
         <!--Cameras-->
         <Label Grid.Row="1" Grid.Column="0" Content="Erkannte Kameras:" Grid.ColumnSpan="2" />
         <ItemsControl Grid.Row="1" Grid.ColumnSpan="2" Grid.Column="0" ItemsSource="{Binding Cameras}">
@@ -51,7 +62,8 @@
                             <Image Grid.Column="1" Source="{Binding CameraIcon}" Width="30" Height="30" Stretch="Uniform" HorizontalAlignment="Right" />
                             <Label Grid.Row="1" Grid.Column="0" Content="{Binding CameraName}" FontWeight="Bold" />
                             <Label Grid.Row="2" Grid.Column="0" Content="Zeitzone:" />
-                            <ComboBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" DisplayMemberPath="DisplayName" ItemsSource="{Binding TimeZoneInfos, Mode=OneWay}" Width="150" SelectedItem="{Binding TimeZoneInfo}" />
+                            <ComboBox Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" DisplayMemberPath="DisplayName" ItemsSource="{Binding TimeZoneInfos, Mode=OneWay}" 
+                                      Width="150" SelectedItem="{Binding TimeZoneInfo}" />
                         </Grid>
                     </controls:Tile>
                 </DataTemplate>
@@ -59,19 +71,81 @@
         </ItemsControl>
 
         <!--List of Photos-->
-        <!--Todo: 
-         - Add Similarity Column 
-         - Set color row with Similarity > 90 to yellow or something else
-         - Remove Grid.Columnspan="2" => on the right side should be something like a preview about all affected photos-->
-        <ListView Grid.Row="2" Grid.Column="0" Margin="1" Grid.ColumnSpan="2" BorderThickness="1" ItemsSource="{Binding Photos}" SelectedItem="{Binding SelectedPhoto}">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Name}" Header="Name" />
-                    <GridViewColumn DisplayMemberBinding="{Binding Comment}" Header="Kommentar" Width="Auto" />
-                    <!--<GridViewColumn DisplayMemberBinding="{Binding Similarity}" Header="Gleichheit" Width="90" />-->
-                </GridView>
-            </ListView.View>
-        </ListView>
+        <DataGrid Grid.Row="2" Grid.Column="0" Margin="2" BorderThickness="1" ItemsSource="{Binding Photos}" SelectedItem="{Binding SelectedPhoto}"
+                  ColumnHeaderStyle="{StaticResource DataGridHeaderStyle}" RowStyle="{StaticResource DataGridRowStyle}" SelectionMode="Single"
+                  AutoGenerateColumns="False" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="Auto" Binding="{Binding Name}" Header="Name" />
+                <DataGridTextColumn Width="Auto" Binding="{Binding DateTaken, StringFormat=dd.MM.yyyy hh:mm}" Header="Aufnahmedatum" />
+                <DataGridTextColumn Width="*" Binding="{Binding Comment}" Header="Kommentar" />
+                <DataGridTextColumn Width="Auto" Binding="{Binding SimilarPhotos.Count}" Header="gleiche Fotos" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border Grid.Row="2" Grid.Column="1" Margin="2" BorderBrush="AliceBlue" BorderThickness="1">
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <!--Originalbild-->
+                <TextBlock Text="{Binding SelectedPhoto.Name}" Margin="0 30" />
+                <Image Name="OriginalImage" Grid.Row="0" Grid.Column="1" Source="{Binding SelectedPhoto.Path}" Stretch="Uniform" Margin="0 2" />
+                <Button Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Width="80" Height="80" Opacity="0.3" 
+                        Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedPhoto.Path}" ToolTip="Bild entfernen">
+                    <Image Source="../Icons/Trash.png" />
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <!--Hinders button for blinking if you hover over them-->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </Trigger>
+                                <!--Display buttons only if you hover over image-->
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=OriginalImage}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+                <!--Vergleichsbild-->
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding FlipViewSelectedPhoto.Destination.File.Name}" Margin="0 30"/>
+                <Border Grid.Row="1" Grid.Column="0" Background="Black" Height="30" VerticalAlignment="Bottom" Margin="0 2" />
+                <controls:FlipView Name="FlipView" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding SelectedPhoto.SimilarPhotos}" 
+                                   MouseOverGlowEnabled="False" SelectedItem="{Binding FlipViewSelectedPhoto}" BannerText="{Binding BannerText}" 
+                                   Margin="0 2" >
+                        <controls:FlipView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Destination.File.FullName}" Stretch="Uniform" />
+                            </DataTemplate>
+                        </controls:FlipView.ItemTemplate>
+                    </controls:FlipView>
+                <Button Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Background="Transparent" Width="80" Height="80" Opacity="0.3"
+                        Command="{Binding DeleteCommand}" CommandParameter="{Binding FlipViewSelectedPhoto.Destination.File.FullName}" ToolTip="Bild entfernen">
+                    <Image Source="../Icons/Trash.png" />
+                    <Button.Style>
+                        <Style TargetType="Button">
+                            <Setter Property="Visibility" Value="Collapsed" />
+                            <Style.Triggers>
+                                <!--Hinders button for blinking if you hover over them-->
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </Trigger>
+                                <!--Display buttons only if you hover over image-->
+                                <DataTrigger Binding="{Binding IsMouseOver, ElementName=FlipView}" Value="True">
+                                    <Setter Property="Visibility" Value="Visible" />
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Button.Style>
+                </Button>
+            </Grid>
+        </Border>
 
         <!--Just to set background-->
         <Grid Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Background="#7A7A7A" >

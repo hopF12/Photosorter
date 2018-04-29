@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using FotoSortierer_v2.Helper.Adapter;
 using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using FotoSortierer_v2.ViewModel.Interfaces;
@@ -9,7 +10,7 @@ using MVVM.Messenger;
 
 namespace FotoSortierer_v2.ViewModel
 {
-    //ToDo comment
+    /// <inheritdoc cref="IHamburgerMenuViewModel" />
     public class HamburgerMenuViewModel : ViewModelBase<HamburgerMenuModel>, IHamburgerMenuViewModel
     {
         private readonly IMessenger _messenger;
@@ -21,11 +22,27 @@ namespace FotoSortierer_v2.ViewModel
             _hamburgerMenuGlyphItems = new ObservableCollectionAdapter<HamburgerMenuGlyphItem>();
 
             messenger.Register<int>(this, "SelectedIndex", index => { SelectedIndex = index; });
-            messenger.Register<IObservableCollectionAdapter<IPhotoViewModel>>(this, "ImportFinished", (photos) =>
-            {
-                var glyphItem = photos.Select(p => new HamburgerMenuGlyphItem() { Glyph = p.Path });
-                HamburgerMenuGlyphItems.AddRange(glyphItem);
-            });
+            messenger.Register<ICollection<IPhotoViewModel>>(this, "ImportFinished", ImportFinished);
+            messenger.Register<IObservableCollectionAdapter<IPhotoViewModel>>(this, "ReorderPhotos", ReorderPhotos);
+        }
+
+        /// <summary>
+        /// Reorders the photos.
+        /// </summary>
+        /// <param name="photos">The photos.</param>
+        private void ReorderPhotos(IObservableCollectionAdapter<IPhotoViewModel> photos)
+        {
+            var glyphItem = photos.Select(p => new HamburgerMenuGlyphItem() {Glyph = p.Path});
+            HamburgerMenuGlyphItems = new ObservableCollectionAdapter<HamburgerMenuGlyphItem>(glyphItem);
+        }
+
+        /// <summary>
+        /// Import is finished and photos have arrived.
+        /// </summary>
+        private void ImportFinished(ICollection<IPhotoViewModel> photos)
+        {
+            var glyphItem = photos.Select(p => new HamburgerMenuGlyphItem() {Glyph = p.Path});
+            HamburgerMenuGlyphItems.AddRange(glyphItem);
         }
 
         /// <inheritdoc />

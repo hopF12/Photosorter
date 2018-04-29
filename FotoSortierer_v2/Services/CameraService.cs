@@ -11,6 +11,7 @@ using Repository.Interfaces;
 
 namespace FotoSortierer_v2.Services
 {
+    /// <inheritdoc />
     public class CameraService : ICameraService
     {
         private readonly ICameraViewModelBuilder _cameraViewModelBuilder;
@@ -20,9 +21,12 @@ namespace FotoSortierer_v2.Services
             _cameraViewModelBuilder = cameraViewModelBuilder;
         }
 
-        public IEnumerable<ICameraViewModel> GetCameras(IEnumerable<IPhotoViewModel> photoCollection)
+        /// <inheritdoc />
+        public ICollection<ICameraViewModel> GetCameras(IEnumerable<IPhotoViewModel> photoCollection)
         {
-            var cameras = photoCollection.Select(photo => _cameraViewModelBuilder.Build(photo.CameraFactory, photo.CameraModel)).GroupBy(c => c.CameraName).Select(c => c.First());
+            var cameras = photoCollection.Where(photo => !string.IsNullOrWhiteSpace(photo.CameraFactory))
+                                         .Select(photo => _cameraViewModelBuilder.Build(photo.CameraFactory, photo.CameraModel))
+                                         .GroupBy(c => c.CameraName).Select(c => c.First()).ToList();
             return cameras;
         }
     }

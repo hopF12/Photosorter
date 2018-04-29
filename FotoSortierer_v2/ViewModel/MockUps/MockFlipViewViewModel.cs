@@ -1,7 +1,4 @@
-﻿using System;
-using System.Windows.Input;
-using System.Windows.Media.Imaging;
-using FotoSortierer_v2.Helper.Adapter;
+﻿using System.Windows.Input;
 using FotoSortierer_v2.Helper.Adapter.Interfaces;
 using FotoSortierer_v2.ViewModel.Interfaces;
 using Model.Interfaces;
@@ -16,7 +13,8 @@ namespace FotoSortierer_v2.ViewModel.MockUps
     {
         public int SelectedIndex { get; set; }
         public IPhotoModel SelectedItem { get; set; }
+        public IProgressbarModel Progressbar { get; set; }
+        public ICommand SaveCommand { get; }
         public IObservableCollectionAdapter<IPhotoViewModel> Images { get; set; }
-        public ICommand NavigationCommand { get; }
     }
 }

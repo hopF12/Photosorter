@@ -4,7 +4,6 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        xmlns:vm="clr-namespace:FotoSortierer_v2.ViewModel"
         xmlns:uc="clr-namespace:FotoSortierer_v2.UserControls"
         xmlns:dialogs="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
@@ -21,20 +20,27 @@
         Title="{Binding Header}" Height="700" Width="1200" Icon="Icons/PhotoSorter.ico">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <TabControl Background="Transparent" SelectedIndex="{Binding SelectedTabIndex}" >
-            <TabItem Header="Öffnen" Foreground="White">
+            <TabItem Header="Importieren" Foreground="White" controls:ControlsHelper.HeaderFontSize="12" Height="18">
                 <uc:ImportView />
             </TabItem>
-            <TabItem Header="Übersicht" Foreground="White">
+            <TabItem Header="Übersicht" Foreground="White" controls:ControlsHelper.HeaderFontSize="12" Height="18">
                 <uc:ManageView />
             </TabItem>
+            <TabItem Header="Einstellungen" Foreground="White" controls:ControlsHelper.HeaderFontSize="12" Height="18">
+                <TextBlock Text="NYI" />
+            </TabItem>
         </TabControl>
+
         <StatusBar Grid.Row="1" Height="Auto">
-            <StatusBarItem >
-                <ProgressBar Width="200" Height="17" Maximum="100" Minimum="0" Value="50" />
+            <StatusBarItem>
+                <Grid>
+                    <ProgressBar Width="200" Height="17" Maximum="{Binding Progressbar.ProgressbarMaxValue}" Minimum="0" Value="{Binding Progressbar.ProgressbarValue}" />
+                    <TextBlock Text="{Binding Progressbar.ProgressbarText}" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" />
+                </Grid>
             </StatusBarItem>
         </StatusBar>
     </Grid>

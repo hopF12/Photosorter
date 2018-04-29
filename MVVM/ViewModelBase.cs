@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using MVVM.Annotations;
 
 namespace MVVM
@@ -13,14 +14,19 @@ namespace MVVM
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged
     {
-        //ToDo comment
         public event PropertyChangedEventHandler PropertyChanged;
-        //ToDo comment
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            CommandManager.InvalidateRequerySuggested();
         }
+    }
+
+    public class ViewModelBase<TModel> : ViewModelBase<TModel, TModel>
+        where TModel : class
+    {
+
     }
 
     /// <inheritdoc />
@@ -28,20 +34,22 @@ namespace MVVM
     /// Viewmodelbase class with Model.
     /// </summary>
     /// <typeparam name="TModel">Model of viewmodel.</typeparam>
-    public class ViewModelBase<TModel> : ViewModelBase
-         where TModel : class 
+    public class ViewModelBase<TInterfaceModel, TModel> : ViewModelBase
+        where TModel : class, TInterfaceModel
+        where TInterfaceModel : class
     {
-        private TModel _model;
+        private TInterfaceModel _model;
 
         protected ViewModelBase()
         {
             Model = Activator.CreateInstance<TModel>();
         }
-        //ToDo comment
-        protected TModel Model
+
+        protected TInterfaceModel Model
         {
             get => _model;
-            set {
+            set
+            {
                 if (Model == value) return;
                 // get all properties
                 var properties = GetType().GetProperties(BindingFlags.Public);

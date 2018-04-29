@@ -9,17 +9,17 @@ namespace Model.Interfaces
     public interface ICameraModel
     {
         /// <summary>
-        /// Name of the camera.
+        /// Icon for camera. Will be binded in tiles.
         /// </summary>
         BitmapImage CameraIcon { get; set; }
 
         /// <summary>
-        /// Indicates in which timezone the camera was used.
+        /// Name of the camera.
         /// </summary>
         string CameraName { get; set; }
 
         /// <summary>
-        /// Icon for camera. Will be binded in tiles.
+        /// Indicates in which timezone the camera was used.
         /// </summary>
         TimeZoneInfo TimeZoneInfo { get; set; }
     }

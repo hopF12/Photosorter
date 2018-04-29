@@ -1,7 +1,10 @@
-﻿using System.Windows.Input;
+﻿using System.Collections.Generic;
+using System.Windows.Input;
 using FotoSortierer_v2.Helper.Adapter;
 using FotoSortierer_v2.Helper.Adapter.Interfaces;
+using FotoSortierer_v2.Services.Interfaces;
 using FotoSortierer_v2.ViewModel.Interfaces;
+using Helper.Factories.Interfaces;
 using Model;
 using Model.Interfaces;
 using MVVM;
@@ -13,19 +16,45 @@ namespace FotoSortierer_v2.ViewModel
     public class FlipViewViewModel : ViewModelBase<FlipViewModel>, IFlipViewViewModel
     {
         private readonly IMessenger _messenger;
+        private readonly IPhotoService _photoService;
         private IObservableCollectionAdapter<IPhotoViewModel> _images;
 
-        public FlipViewViewModel(IMessenger messenger)
+        public FlipViewViewModel(IMessenger messenger, IPhotoService photoService, IFactoryMethod factory)
         {
             _messenger = messenger;
-            _images = new ObservableCollectionAdapter<IPhotoViewModel>();
+            _photoService = photoService;
+            _images = factory.Create<ObservableCollectionAdapter<IPhotoViewModel>>();
+
+            SaveCommand = new RelayCommand(p => ExcecuteSave());
 
             messenger.Register<int>(this, "SelectedIndex", index => { SelectedIndex = index; });
-            messenger.Register<IObservableCollectionAdapter<IPhotoViewModel>>(this, "ImportFinished", (photos) =>
-            {
-                Images.AddRange(photos);
-            });
+            messenger.Register<bool>(this, "UpdateOrder", ReorderPhotos);
+            messenger.Register<ICollection<IPhotoViewModel>>(this, "ImportFinished", ImportFinished);
         }
+
+        private void ExcecuteSave()
+        {
+            _messenger.Send(Images, "SaveImages");
+        }
+
+        /// <summary>
+        /// Import is finished and photos have arrived.
+        /// </summary>
+        private void ImportFinished(ICollection<IPhotoViewModel> photos)
+        {
+            Images.AddRange(photos);
+        }
+
+        /// <summary>
+        /// Reorders the photos.
+        /// </summary>
+        private void ReorderPhotos(bool b)
+        {
+            Images = Images.Order(photo => photo.DateTaken);
+            _messenger.Send(Images, "ReorderPhotos");
+        }
+
+        public ICommand SaveCommand { get; }
 
         /// <inheritdoc />
         public IObservableCollectionAdapter<IPhotoViewModel> Images

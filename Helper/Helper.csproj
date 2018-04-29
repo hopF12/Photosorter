@@ -44,13 +44,32 @@
   <ItemGroup>
     <Compile Include="Builder\Interfaces\IPhotoModelBuilder.cs" />
     <Compile Include="Builder\PhotoModelBuilder.cs" />
+    <Compile Include="Comparer\Interfaces\IImageComparer.cs" />
+    <Compile Include="Comparer\ImageComparer.cs" />
+    <Compile Include="Others\Constants.cs" />
+    <Compile Include="Factories\CompareableImageFactory.cs" />
+    <Compile Include="Factories\FactoryMethod.cs" />
+    <Compile Include="Factories\Interfaces\ICompareableImageFactory.cs" />
+    <Compile Include="Factories\Interfaces\IFactoryMethod.cs" />
+    <Compile Include="Others\Interfaces\IJpegMetadataAdapter.cs" />
+    <Compile Include="Others\JpegMetadataAdapter.cs" />
+    <Compile Include="Others\LinqAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Wrapper\ITaskWrapper.cs" />
+    <Compile Include="Wrapper\TaskWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageSimilarity\ImageSimilarity.csproj">
+      <Project>{0E019414-C27F-4AC7-B66F-3E1C60C50E5B}</Project>
+      <Name>ImageSimilarity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{095A4146-5029-41A1-8423-D842176A6519}</Project>
       <Name>Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Wrapper\Interfaces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

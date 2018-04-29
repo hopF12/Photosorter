@@ -1,10 +1,8 @@
-﻿using Model;
-using Model.Interfaces;
+﻿using Model.Interfaces;
 
 namespace FotoSortierer_v2.ViewModel.Interfaces
 {
-
-    /// <inheritdoc />
+    /// <inheritdoc cref="IPhotoModel" />
     /// <summary>
     /// Viewmodel for singe photo.
     /// </summary>

@@ -9,5 +9,8 @@ namespace Model
         public int SelectedIndex { get; set; }
         ///<inheritdoc />
         public IPhotoModel SelectedItem { get; set; }
+
+        /// <inheritdoc />
+        public IProgressbarModel Progressbar { get; set; }
     }
 }

@@ -14,7 +14,6 @@ namespace FotoSortierer_v2.ViewModel.Interfaces
     {
         /// <summary>
         /// List of all imported images.
-        /// Todo: eventually replace HamburgerMenuGlyphItem with adapter a class
         /// </summary>
         IObservableCollectionAdapter<HamburgerMenuGlyphItem> HamburgerMenuGlyphItems { get; set; }
     }

@@ -51,6 +51,10 @@
       <Project>{15788549-6C97-4F66-957C-9945D0436711}</Project>
       <Name>Helper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ImageSimilarity\ImageSimilarity.csproj">
+      <Project>{0E019414-C27F-4AC7-B66F-3E1C60C50E5B}</Project>
+      <Name>ImageSimilarity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{095A4146-5029-41A1-8423-D842176A6519}</Project>
       <Name>Model</Name>

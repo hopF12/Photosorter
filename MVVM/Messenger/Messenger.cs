@@ -7,26 +7,14 @@ namespace MVVM.Messenger
     ///<inheritdoc />
     public class Messenger : IMessenger
     {
-        private static Messenger _instance;
         private static readonly object LockObject = new object();
         private readonly Dictionary<Type, List<ActionIdentifier>> _references;
         
-        //ToDo if this is a singleton this should be private, but better is to use IoC instead of singleton
         public Messenger()
         {
             _references = new Dictionary<Type, List<ActionIdentifier>>();
         }
-        ///<inheritdoc /> //ToDo this is missing in the interface
-        public static Messenger Instance
-        {
-            get
-            {
-                lock (LockObject)
-                {
-                    return _instance ?? (_instance = new Messenger());
-                }
-            }
-        }
+
         ///<inheritdoc />
         public void Register<TNotification>(object recipient, Action<TNotification> action)
         {

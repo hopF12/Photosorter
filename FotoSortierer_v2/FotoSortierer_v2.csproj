@@ -38,8 +38,11 @@
     <Reference Include="Autofac, Version=4.6.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
       <HintPath>..\packages\Autofac.4.6.1\lib\net45\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="MahApps.Metro, Version=1.5.0.23, Culture=neutral, PublicKeyToken=f4fb5a3c4d1e5b4f, processorArchitecture=MSIL">
-      <HintPath>..\packages\MahApps.Metro.1.5.0\lib\net45\MahApps.Metro.dll</HintPath>
+    <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\ControlzEx.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro, Version=1.6.1.4, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.1.6.1\lib\net45\MahApps.Metro.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
@@ -59,7 +62,9 @@
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
-    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\ControlzEx.3.0.2.4\lib\net45\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -80,19 +85,20 @@
     </ApplicationDefinition>
     <Compile Include="Helper\Builder\CameraViewModelBuilder.cs" />
     <Compile Include="Helper\Builder\Interfaces\ICameraViewModelBuilder.cs" />
-    <Compile Include="Helper\DebugHelper.cs" />
     <Compile Include="Helper\Builder\Interfaces\IPhotoViewModelBuilder.cs" />
     <Compile Include="Helper\Builder\PhotoViewModelBuilder.cs" />
     <Compile Include="Helper\Adapter\Interfaces\IObservableCollectionAdapter.cs" />
     <Compile Include="Helper\Adapter\ObservableCollectionAdapter.cs" />
+    <Compile Include="Helper\Comparer\PhotoViewModelComparer.cs" />
+    <Compile Include="Helper\Converter\DataGridValueConverter.cs" />
+    <Compile Include="Helper\Extensions.cs" />
     <Compile Include="Helper\IocContainer.cs" />
     <Compile Include="Helper\ViewModelLocator.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="Services\CameraService.cs" />
     <Compile Include="Services\DialogsService.cs" />
     <Compile Include="Services\Interfaces\ICameraService.cs" />
-    <Compile Include="Services\Interfaces\IOpenFilesDialogService.cs" />
-    <Compile Include="Services\Interfaces\ISaveFolderDialogService.cs" />
+    <Compile Include="Services\Interfaces\IDialogService.cs" />
     <Compile Include="Services\Interfaces\IPhotoService.cs" />
     <Compile Include="Services\PhotoService.cs" />
     <Compile Include="UserControls\FlipView.xaml.cs">
@@ -100,6 +106,9 @@
     </Compile>
     <Compile Include="UserControls\HamburgerMenu.xaml.cs">
       <DependentUpon>HamburgerMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ImageUserControl.xaml.cs">
+      <DependentUpon>ImageUserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\ImportView.xaml.cs">
       <DependentUpon>ImportView.xaml</DependentUpon>
@@ -117,6 +126,8 @@
     <Compile Include="ViewModel\Interfaces\IImportViewModel.cs" />
     <Compile Include="ViewModel\ImportViewModel.cs" />
     <Compile Include="ViewModel\Interfaces\IPhotoViewModel.cs" />
+    <Compile Include="ViewModel\Interfaces\IProgressbarViewModel.cs" />
+    <Compile Include="ViewModel\ProgressbarViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\MockUps\MockImportViewModel.cs" />
     <Compile Include="ViewModel\MockUps\MockFlipViewViewModel.cs" />
@@ -146,6 +157,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\HamburgerMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ImageUserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,16 +202,20 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\default.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\PhotoSorter.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Helper\Helper.csproj">
       <Project>{15788549-6C97-4F66-957C-9945D0436711}</Project>
       <Name>Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageSimilarity\ImageSimilarity.csproj">
+      <Project>{0E019414-C27F-4AC7-B66F-3E1C60C50E5B}</Project>
+      <Name>ImageSimilarity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{095a4146-5029-41a1-8423-d842176a6519}</Project>
@@ -213,34 +232,51 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Icons\Calendar.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Icons\Folder.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\NextDay.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\PrevDay.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\rotate-left.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\rotate-right.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Icons\Save.ico">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Icons\Camera_Factory_Icons\apple.ico" />
-    <Resource Include="Icons\Camera_Factory_Icons\Canon.ico" />
-    <Resource Include="Icons\Camera_Factory_Icons\LG Electronics.ico" />
-    <Resource Include="Icons\Camera_Factory_Icons\Nikon.ico" />
-    <Resource Include="Icons\Camera_Factory_Icons\Samsung.ico" />
-    <Resource Include="Icons\Camera_Factory_Icons\Sony.ico" />
+    <Resource Include="Icons\Camera_Factory_Icons\apple.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Camera_Factory_Icons\Canon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Camera_Factory_Icons\LG Electronics.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Camera_Factory_Icons\Nikon.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Camera_Factory_Icons\Samsung.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Icons\Camera_Factory_Icons\Sony.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Icons\Camera_Factory_Icons\unbekannt.ico">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Icons\open_folder.ico" />
+    <Resource Include="Icons\compare.png" />
+    <Resource Include="Icons\Trash.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

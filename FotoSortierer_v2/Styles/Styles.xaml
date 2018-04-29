@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converter="clr-namespace:FotoSortierer_v2.Helper.Converter"
                     xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls">
-    
+
     <Style x:Key="LargeTileStyle" TargetType="controls:Tile">
         <Setter Property="Height" Value="125" />
         <Setter Property="TextOptions.TextFormattingMode" Value="Display" />
@@ -11,4 +12,27 @@
         <Setter Property="Width" Value="292" />
     </Style>
     
+    <Style x:Key="DataGridHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="BorderBrush" Value="White" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Padding" Value="10"></Setter>
+    </Style>
+
+    <Style x:Key="DataGridRowStyle" TargetType="{x:Type DataGridRow}">
+        <Style.Resources>
+            <converter:DataGridValueConverter x:Key="ColorConverter" />
+        </Style.Resources>
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsFolder}" Value="false">
+                <Setter Property="Background" Value="Transparent" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding IsFolder}" Value="true">
+                <Setter Property="Background" Value="DarkSlateBlue" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding SimilarPhotos.Count, Converter={StaticResource ColorConverter}}" Value="true">
+                <Setter Property="Background" Value="DarkGoldenrod" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>

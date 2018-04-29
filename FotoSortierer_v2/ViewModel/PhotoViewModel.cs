@@ -1,15 +1,27 @@
 ﻿using System;
-using System.Windows.Media;
+using System.Collections.Generic;
+using FotoSortierer_v2.Helper;
 using FotoSortierer_v2.ViewModel.Interfaces;
+using ImageSimilarity;
 using Model;
-using Model.Interfaces;
 using MVVM;
+using MVVM.Messenger;
 
 namespace FotoSortierer_v2.ViewModel
 {
     /// <inheritdoc cref="IPhotoViewModel" />
     public class PhotoViewModel : ViewModelBase<PhotoModel>, IPhotoViewModel
     {
+        public PhotoViewModel(IMessenger messenger)
+        {
+            messenger.Register<CameraViewModel>(this, "UpdateOffset", viewModel =>
+            {
+                // Update offset if camera's timezone has changed
+                if ($"{CameraFactory} {CameraModel}" == viewModel.CameraName)
+                    OffSet = viewModel.TimeZoneInfo;
+            });
+        }
+
         /// <inheritdoc />
         public string Name
         {
@@ -47,13 +59,13 @@ namespace FotoSortierer_v2.ViewModel
         }
 
         /// <inheritdoc />
-        public int Similarity
+        public ICollection<ISimilarityImages> SimilarPhotos
         {
-            get => Model.Similarity;
+            get => Model.SimilarPhotos;
             set
             {
-                if (Model.Similarity == value) return;
-                Model.Similarity = value;
+                if (Equals(Model.SimilarPhotos, value)) return;
+                Model.SimilarPhotos = value;
                 OnPropertyChanged();
             }
         }
@@ -85,11 +97,35 @@ namespace FotoSortierer_v2.ViewModel
         /// <inheritdoc />
         public DateTime DateTaken
         {
-            get => Model.DateTaken;
+            get => Model.DateTaken.AddHours(OffSet.GetOffsetInHours());
             set
             {
                 if (Model.DateTaken == value) return;
                 Model.DateTaken = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <inheritdoc />
+        public TimeZoneInfo OffSet
+        {
+            private get => Model.OffSet;
+            set
+            {
+                if (Equals(Model.OffSet, value)) return;
+                Model.OffSet = value;
+                OnPropertyChanged();
+            }
+        }
+
+        /// <inheritdoc />
+        public bool IsFolder
+        {
+            get => Model.IsFolder;
+            set
+            {
+                if (Model.IsFolder == value) return;
+                Model.IsFolder = value;
                 OnPropertyChanged();
             }
         }

@@ -1,8 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using FotoSortierer_v2.ViewModel.Interfaces;
-using Model.Interfaces;
+using ImageSimilarity;
 
 namespace FotoSortierer_v2.ViewModel.MockUps
 {
@@ -19,6 +19,9 @@ namespace FotoSortierer_v2.ViewModel.MockUps
         public string CameraFactory { get; set; }
         public string CameraModel { get; set; }
         public DateTime DateTaken { get; set; }
-        public int Similarity { get; set; }
+        public TimeZoneInfo OffSet { get; set; }
+        public ICollection<ISimilarityImages> SimilarPhotos { get; set; }
+        public bool IsFolder { get; set; }
+        public float ProgressbarValue { get; set; }
     }
 }

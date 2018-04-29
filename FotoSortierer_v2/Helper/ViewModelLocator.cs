@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel;
 using System.Windows;
 using Autofac;
-using FotoSortierer_v2.ViewModel;
 using FotoSortierer_v2.ViewModel.Interfaces;
 using FotoSortierer_v2.ViewModel.MockUps;
 

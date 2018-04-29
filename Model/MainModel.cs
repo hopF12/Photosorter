@@ -7,5 +7,8 @@ namespace Model
     {
         ///<inheritdoc />
         public int SelectedTabIndex { get; set; }
+
+        /// <inheritdoc />
+        public IProgressbarModel Progressbar { get; set; }
     }
 }

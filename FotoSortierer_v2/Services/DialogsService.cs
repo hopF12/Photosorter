@@ -6,7 +6,8 @@ using Ookii.Dialogs.Wpf;
 
 namespace FotoSortierer_v2.Services
 {
-    public class DialogsService : IOpenFilesDialogService, ISaveFolderDialogService
+    /// <inheritdoc />
+    public class DialogsService : IDialogService
     {
         private readonly VistaOpenFileDialog _openFileDialog;
         private readonly VistaFolderBrowserDialog _folderBrowserDialog;
@@ -17,6 +18,7 @@ namespace FotoSortierer_v2.Services
             _folderBrowserDialog = folderBrowserDialog;
         }
 
+        /// <inheritdoc />
         public IEnumerable<string> GetFileNames()
         {
             var fileNames = new List<string>();
@@ -30,11 +32,31 @@ namespace FotoSortierer_v2.Services
             return fileNames;
         }
 
-        public void SaveFiles(IEnumerable<IPhotoModel> photos)
+        /// <inheritdoc />
+        public string SaveFiles(IEnumerable<IPhotoModel> photos)
         {
-            // save all files in target path
+            // return path from folder dialog
+            return !_folderBrowserDialog.ShowDialog().HasValue ? null : _folderBrowserDialog.SelectedPath;
+        }
 
-            throw new System.NotImplementedException();
+        /// <inheritdoc />
+        public bool ShouldDelete(string path)
+        {
+            bool result;
+
+            using (var taskDialog = new TaskDialog())
+            {
+                taskDialog.Buttons.Add(new TaskDialogButton(ButtonType.Yes));
+                taskDialog.Buttons.Add(new TaskDialogButton(ButtonType.No));
+                taskDialog.Buttons.Add(new TaskDialogButton(ButtonType.Cancel));
+
+                taskDialog.MainInstruction = "Bild entfernen?";
+                taskDialog.Content = $"Möchtest du das Bild: {path} wirklich entfernen?";
+
+                result = taskDialog.ShowDialog().ButtonType == ButtonType.Yes;
+            }
+
+            return result;
         }
     }
 }

@@ -13,7 +13,10 @@ namespace Repository.Interfaces
         /// Get for each filename an object of Photomodel.
         /// </summary>
         /// <param name="fileNames">The paths of each photo that should be created as a model.</param>
+        /// <param name="pbValue"></param>
         /// <returns>Returns the photomodels.</returns>
-        Task<IEnumerable<IPhotoModel>> GetPhotosAsync(IEnumerable<string> fileNames);
+        Task<IEnumerable<IPhotoModel>> GetPhotosAsync(ICollection<string> fileNames, IProgressbarModel pbValue);
+
+        Task Save(IEnumerable<IPhotoModel> photos, IProgressbarModel progressbar, string destination, bool createSubfolder = false);
     }
 }

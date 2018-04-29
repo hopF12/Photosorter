@@ -3,8 +3,11 @@ using System.Windows;
 using Autofac;
 using FotoSortierer_v2.Helper;
 using FotoSortierer_v2.Helper.Builder;
+using FotoSortierer_v2.Helper.Comparer;
 using FotoSortierer_v2.Services;
 using Helper.Builder;
+using Helper.Comparer;
+using Helper.Factories;
 using MVVM.Messenger;
 using Ookii.Dialogs.Wpf;
 using Repository;
@@ -48,6 +51,10 @@ namespace FotoSortierer_v2
             builder.RegisterType<PhotoModelBuilder>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<CameraViewModelBuilder>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<PhotoViewModelBuilder>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<CompareableImageFactory>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<ImageComparer>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<FactoryMethod>().AsImplementedInterfaces().SingleInstance();
+            builder.RegisterType<PhotoViewModelComparer>().AsImplementedInterfaces().SingleInstance();
 
             // register Repositories
             builder.RegisterType<PhotoRepository>().AsImplementedInterfaces().SingleInstance();
@@ -58,7 +65,7 @@ namespace FotoSortierer_v2
             builder.RegisterType<CameraService>().AsImplementedInterfaces().SingleInstance();
 
             // register all viewmodels as its implemented interfaces, except the mockviewmodel.
-            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel") && !t.Name.StartsWith("Mock")).AsImplementedInterfaces();
+            builder.RegisterAssemblyTypes(Assembly.GetExecutingAssembly()).Where(t => t.Name.EndsWith("ViewModel") && !t.Name.StartsWith("Mock")).AsImplementedInterfaces().SingleInstance();
 
             _appContainer = builder.Build();
         }

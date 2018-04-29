@@ -1,4 +1,5 @@
-﻿using System.Windows.Media.Imaging;
+﻿using System.Collections.Generic;
+using System.Windows.Media.Imaging;
 using Model.Interfaces;
 
 namespace Helper.Builder.Interfaces
@@ -12,8 +13,9 @@ namespace Helper.Builder.Interfaces
         /// Builds a new instance of PhotoModel with the given parameters.
         /// </summary>
         /// <param name="fileName">Path of the photo.</param>
+        /// <param name="fileNames">All files that should be imported.</param>
         /// <param name="metaData">Metadata from photo.</param>
         /// <returns>Returns a new instance of Photomodel.</returns>
-        IPhotoModel Build(string fileName, BitmapMetadata metaData);
+        IPhotoModel Build(string fileName, ICollection<string> fileNames, BitmapMetadata metaData);
     }
 }

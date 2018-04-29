@@ -14,16 +14,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="36" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <uc:HamburgerMenu Grid.ColumnSpan="2" />
         <uc:FlipView Grid.Column="1" Grid.Row="0" Grid.RowSpan="2" />
-        <Grid Background="#33959595" Row="1" Grid.Column="0"></Grid>
+        <Grid Background="#33959595" Row="1" Grid.Column="0" />
     </Grid>
 </UserControl>
-
-
-
-
-
-
-

@@ -50,6 +50,7 @@
     <Compile Include="CameraModel.cs" />
     <Compile Include="FlipViewModel.cs" />
     <Compile Include="HamburgerMenuModel.cs" />
+    <Compile Include="Interfaces\IIsSomethingRunning.cs" />
     <Compile Include="Interfaces\IMainModel.cs" />
     <Compile Include="Interfaces\IHamburgerMenuModel.cs" />
     <Compile Include="Interfaces\IFlipViewModel.cs" />
@@ -57,11 +58,17 @@
     <Compile Include="Interfaces\IImportModel.cs" />
     <Compile Include="ImportModel.cs" />
     <Compile Include="Interfaces\IPhotoModel.cs" />
+    <Compile Include="Interfaces\IProgressbarModel.cs" />
+    <Compile Include="ProgressbarModel.cs" />
     <Compile Include="MainModel.cs" />
     <Compile Include="PhotoModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ImageSimilarity\ImageSimilarity.csproj">
+      <Project>{0E019414-C27F-4AC7-B66F-3E1C60C50E5B}</Project>
+      <Name>ImageSimilarity</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MVVM\MVVM.csproj">
       <Project>{A5A4075D-0DE7-4CDF-B7D5-C5E3CF264858}</Project>
       <Name>MVVM</Name>
